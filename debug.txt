@@ -1,3 +1,6 @@
 
 chmod +x *.sh
+
 ln -s ./public ./html
+
+php vendor/bin/phinx

@@ -6,7 +6,9 @@
             "email": "dieisson.martins.santos@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "robmorgan/phinx": "^0.12.7"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
