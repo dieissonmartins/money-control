@@ -4,3 +4,6 @@ chmod +x *.sh
 ln -s ./public ./html
 
 php vendor/bin/phinx
+
+// create migrarion
+vendor/bin/phinx create CreateNameMigrate
