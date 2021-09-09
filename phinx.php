@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$db = include __DIR__ . 'config/db.php';
+$db = include __DIR__ . '/config/db.php';
 
 [
     'driver' => $driver,
@@ -13,7 +13,7 @@ $db = include __DIR__ . 'config/db.php';
     'password' => $password,
     'charset' => $charset,
     'collation' => $collation
-] = $db;
+] = $db['development'];
 
 return [
     'paths' => [
