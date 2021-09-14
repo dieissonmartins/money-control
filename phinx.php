@@ -31,10 +31,12 @@ return [
             'adapter' => $driver,
             'host' => $host,
             'name' => $dataBase,
+            'user' => $userName,
             'pass' => $password,
             'charset' => $charset,
             'collation' => $collation
-        ]
+        ],
+        'version_order' => 'creation'
     ]
 ];
 ?>
