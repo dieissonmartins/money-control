@@ -14,5 +14,8 @@
             "App\\": "app/",
             "Src\\": "src/"
         }
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.9"
     }
 }
