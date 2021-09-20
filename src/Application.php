@@ -2,6 +2,8 @@
 
 namespace Src;
 
+use Src\Plugins\PluginInterface;
+
 class Application
 {
     private $serviceContainer;
@@ -16,7 +18,7 @@ class Application
         return $this->serviceContainer->get($name);
     }
 
-    public function addService(string $name, $service)
+    public function addService(string $name, $service): void
     {
         if (is_callable($service)) {
 
@@ -25,5 +27,10 @@ class Application
 
             $this->serviceContainer->add($name, $service);
         }
+    }
+
+    public function plugin(PluginInterface $plugin): void
+    {
+        $plugin->register($this->serviceContainer);
     }
 }
