@@ -5,7 +5,6 @@ namespace Src\Plugins;
 
 use Aura\Router\RouterContainer;
 use Cake\Core\ContainerInterface;
-use Pimple\Container;
 use Psr\Http\Message\RequestInterface;
 use Src\ServiceContainerInterface;
 use Zend\Diactoros\ServerRequestFactory;
