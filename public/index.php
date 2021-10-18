@@ -14,7 +14,7 @@ $app = new Application($serviceContainer);
 $app->plugin(new RoutePlugin());
 
 
-$app->get('/', function () {
+$app->get('/teste', function () {
     echo "Home router start";
 });
 

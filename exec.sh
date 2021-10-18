@@ -1,1 +1,1 @@
-docker exec -it money_control_money-control-app_1 bash
+docker exec -it travellist-app bash
