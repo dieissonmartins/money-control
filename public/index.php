@@ -1,9 +1,11 @@
 <?php
 
+use Psr\Http\Message\RequestInterface;
 use Src\Application;
 use Src\Plugins\RoutePlugin;
 use Src\ServiceContainer;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -15,14 +17,17 @@ $app = new Application($serviceContainer);
 $app->plugin(new RoutePlugin());
 
 
-$app->get('/', function() {
+$app->get('/', function(RequestInterface $request) {
     
-    echo "teste coreção rota home.";
+    var_dump($request->getUri());
+    die();
+    
 });
 
-$app->get('/teste', function() {
+$app->get('/home/{name}', function(ServerRequestInterface $request) {
     
-    echo "teste coreção rota teste.";
+    var_dump($request->getAttribute('name'));
+    die();
 });
 
 

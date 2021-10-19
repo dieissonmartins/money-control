@@ -52,9 +52,19 @@ class Application
 
 
         $route = $this->service('route');
+        
+        if(!$route) {
+            echo "Page not found";
+            exit;
+        }
+
 
         /** @var ServerRequestInterface $request */
         $request = $this->service(RequestInterface::class);
+
+        foreach($route->attributes as $key => $value) {
+            $request = $request->withAttribute($key,$value);
+        }
 
         $callable = $route->handler;
         $callable($request);
