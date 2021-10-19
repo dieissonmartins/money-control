@@ -14,16 +14,12 @@ class RoutePlugin implements PluginInterface
     public function register(ServiceContainerInterface $container)
     {
         $routerContainer = new RouterContainer();
-
-        /* register routes */
+        /* Registrar as rotas da aplicação */
         $map = $routerContainer->getMap();
-
-        /* identify router access */
+        /* Tem a função de identificar a rota que está sendo acessada */
         $matcher = $routerContainer->getMatcher();
-
-        /* generate link by base router registered  */
+        /* Tem a funão de gerar links com base nas rotas registradas*/
         $generator = $routerContainer->getGenerator();
-
         $request = $this->getRequest();
 
         $container->add('routing', $map);
@@ -31,12 +27,14 @@ class RoutePlugin implements PluginInterface
         $container->add('routing.generator', $generator);
         $container->add(RequestInterface::class, $request);
 
-        $container->addLazy('route', function (ContainerInterface $container) {
-            $matcher = $container->get('routing.matcher');
-            $request = $container->get(RequestInterface::class);
+        $container->addLazy('route', function ($container) {
+                
+                $matcher = $container->get('routing.matcher');
+                $request = $container->get(RequestInterface::class);
+                return $matcher->match($request);
+            }
+        );
 
-            return $matcher->match($request);
-        });
     }
 
     protected function getRequest(): RequestInterface

@@ -1,8 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Src;
 
 use Src\Plugins\PluginInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Diactoros\Response\SapiEmitter;
 
 class Application
 {
@@ -46,7 +52,11 @@ class Application
 
 
         $route = $this->service('route');
+
+        /** @var ServerRequestInterface $request */
+        $request = $this->service(RequestInterface::class);
+
         $callable = $route->handler;
-        $callable();
+        $callable($request);
     }
 }
