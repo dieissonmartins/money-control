@@ -1,5 +1,8 @@
 FROM php:7.4-fpm
 
+LABEL Maintainer="Dieisson Martins <dieisson.martins.santos@gmail.com>"
+LABEL Description="Docker Image Nginx & PHP-FPM 7.4"
+
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
