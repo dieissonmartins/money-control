@@ -6,7 +6,7 @@ use Xtreamwayz\Pimple\Container;
 
 class ServiceContainer implements ServiceContainerInterface
 {
-    private Container $container;
+    private $container;
 
     public function __construct()
     {

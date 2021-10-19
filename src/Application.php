@@ -1,8 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Src;
 
 use Src\Plugins\PluginInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Diactoros\Response\SapiEmitter;
 
 class Application
 {
@@ -46,7 +52,30 @@ class Application
 
 
         $route = $this->service('route');
+        
+        if(!$route) {
+            echo "Page not found";
+            exit;
+        }
+
+
+        /** @var ServerRequestInterface $request */
+        $request = $this->service(RequestInterface::class);
+
+        foreach($route->attributes as $key => $value) {
+            $request = $request->withAttribute($key,$value);
+        }
+
         $callable = $route->handler;
-        $callable();
+        $response = $callable($request);
+
+        $this->emitResponse($response);
+    }
+
+    protected function emitResponse(ResponseInterface $response) {
+
+        // Sapi - Server API - Server Applicartion Promma Interface
+        $emitter = new SapiEmitter();
+        $emitter->emit($response);
     }
 }
