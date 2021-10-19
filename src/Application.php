@@ -67,6 +67,15 @@ class Application
         }
 
         $callable = $route->handler;
-        $callable($request);
+        $response = $callable($request);
+
+        $this->emitResponse($response);
+    }
+
+    protected function emitResponse(ResponseInterface $response) {
+
+        // Sapi - Server API - Server Applicartion Promma Interface
+        $emitter = new SapiEmitter();
+        $emitter->emit($response);
     }
 }

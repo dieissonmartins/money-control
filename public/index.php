@@ -6,6 +6,7 @@ use Src\Plugins\RoutePlugin;
 use Src\ServiceContainer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -26,8 +27,14 @@ $app->get('/', function(RequestInterface $request) {
 
 $app->get('/home/{name}', function(ServerRequestInterface $request) {
     
-    var_dump($request->getAttribute('name'));
-    die();
+    $response = new Response();
+    
+    $response
+        ->getBody()
+        ->write("response");
+
+    return $response;
+
 });
 
 
