@@ -4,7 +4,7 @@ use Psr\Http\Message\RequestInterface;
 use Src\Application;
 use Src\Plugins\RoutePlugin;
 use Src\ServiceContainer;
-use Psr\Http\Message\ResponseInterface;
+use Src\Plugins\ViewPlugin;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
@@ -16,12 +16,16 @@ $app = new Application($serviceContainer);
 
 
 $app->plugin(new RoutePlugin());
+$app->plugin(new ViewPlugin());
 
 
-$app->get('/', function(RequestInterface $request) {
+$app->get('/', function(RequestInterface $request) use ($app) {
     
-    var_dump($request->getUri());
-    die();
+    $view = $app->service('view.render');
+   
+    return $view->render('teste.html.twig', [
+        'name' => 'Dieison Martins'
+    ]); 
     
 });
 

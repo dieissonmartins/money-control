@@ -5,6 +5,7 @@ namespace Src\Plugins;
 
 use Psr\Container\ContainerInterface;
 use Src\ServiceContainerInterface;
+use Src\View\ViewRender;
 
 class ViewPlugin implements PluginInterface
 {
@@ -16,6 +17,11 @@ class ViewPlugin implements PluginInterface
 
             return $twig;
         });
-
+        
+        $container->addLazy('view.render', function (ContainerInterface $container) {
+            $twigEnvironment = $container->get('twig');
+            
+            return new ViewRender($twigEnvironment);
+        });
     }
 }
