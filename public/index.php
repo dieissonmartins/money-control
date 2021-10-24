@@ -27,4 +27,12 @@ $app->get('/', function(RequestInterface $request) use ($app) {
     
 });
 
+$app->get('/category-costs', function(RequestInterface $request) use ($app) {
+    
+    $view = $app->service('view.render');
+   
+    return $view->render('category-costs/index.html.twig'); 
+    
+});
+
 $app->start();
