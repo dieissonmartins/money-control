@@ -23,23 +23,16 @@ $app->get('/', function(RequestInterface $request) use ($app) {
     
     $view = $app->service('view.render');
    
-    return $view->render('teste.html.twig', [
-        'name' => 'Dieison Martins'
-    ]); 
+    return $view->render('layout.html.twig'); 
     
 });
 
-$app->get('/home/{name}', function(ServerRequestInterface $request) {
+$app->get('/category-costs', function(RequestInterface $request) use ($app) {
     
-    $response = new Response();
+    $view = $app->service('view.render');
+   
+    return $view->render('category-costs/index.html.twig'); 
     
-    $response
-        ->getBody()
-        ->write("response");
-
-    return $response;
-
 });
-
 
 $app->start();
