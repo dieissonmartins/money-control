@@ -32,8 +32,13 @@ $app->get('/', function(RequestInterface $request) use ($app) {
 $app->get('/category-costs', function(RequestInterface $request) use ($app) {
     
     $view = $app->service('view.render');
+
+    $model = new \Src\Models\CategoryCost();
+    $categoryCosts = $model->all();
    
-    return $view->render('category-costs/index.html.twig'); 
+    return $view->render('category-costs/index.html.twig',[
+        'categories' => $categoryCosts
+    ]); 
     
 });
 
