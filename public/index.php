@@ -41,7 +41,7 @@ $app->get('/category-costs', function(RequestInterface $request) use ($app) {
         'categories' => $categoryCosts
     ]); 
     
-});
+},'category-costs.index');
 
 $app->get('/category-costs/create', function(RequestInterface $request) use ($app) {
     
@@ -49,7 +49,7 @@ $app->get('/category-costs/create', function(RequestInterface $request) use ($ap
 
     return $view->render('category-costs/create.html.twig'); 
     
-});
+},'category-costs.create');
 
 $app->post('/category-costs/store', function(ServerRequestInterface $request) use ($app) {
     
@@ -58,6 +58,6 @@ $app->post('/category-costs/store', function(ServerRequestInterface $request) us
     \Src\Models\CategoryCost::create($data);
  
     return $app->redirect('/category-costs');
- });
+ },'category-costs.store');
 
 $app->start();

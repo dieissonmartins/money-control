@@ -1,10 +1,10 @@
-<form method="post" action="/category-costs/store">
+<form method="post" action="{{ route('category-costs.store') }}">
     <div class="form-group">
         <label class="control-label">Nome</label>
         <input class="form-control" type="text" placeholder="Nome"
                name="name" value="{{ category.name }}">
     </div>
-    <button type="submit" class="btn btn-primary btn-block">
-        <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
+    <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-{{ submitIcon }}"></span> Cadastrar
     </button>
 </form>
