@@ -51,14 +51,13 @@ $app->get('/category-costs/create', function(RequestInterface $request) use ($ap
     
 });
 
-$app->post('/category-costs/store', function(ServerRequestInterface $request) {
+$app->post('/category-costs/store', function(ServerRequestInterface $request) use ($app) {
     
     //create category
     $data = $request->getParsedBody();
- 
     \Src\Models\CategoryCost::create($data);
  
-    return new RedirectResponse('/category-costs');
+    return $app->redirect('/category-costs');
  });
 
 $app->start();

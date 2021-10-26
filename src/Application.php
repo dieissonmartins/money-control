@@ -56,6 +56,12 @@ class Application
         return $this;
     }
 
+    public function redirect($path): RedirectResponse
+    {
+
+        return new RedirectResponse($path);
+    }
+
     public function start(){
 
 
