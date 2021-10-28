@@ -84,5 +84,15 @@ $app->post('/category-costs/{id}/update', function(ServerRequestInterface $reque
 
 },'category-costs.update');
 
+$app->get('/category-costs/{id}/destroy', function(ServerRequestInterface $request) use ($app) {
+
+    $id = $request->getAttribute('id');
+    
+    $categoryCost =  \Src\Models\CategoryCost::findOrFail($id);
+    $categoryCost->delete();
+
+    return $app->redirect('/category-costs');
+
+},'category-costs.destroy');
 
 $app->start();
