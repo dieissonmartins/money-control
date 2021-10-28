@@ -34,8 +34,8 @@
                                         <td>{{ category.id }}</td>
                                         <td>{{ category.name }}</td>
                                         <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            <a href="{{ route('category-costs.edit',{'id': category.id}) }}">
+                                                <span class="glyphicon glyphicon-pencil"></span> Editar
                                             </a>
                                             |
                                             <a href="#">

@@ -58,6 +58,31 @@ $app->post('/category-costs/store', function(ServerRequestInterface $request) us
     \Src\Models\CategoryCost::create($data);
  
     return $app->redirect('/category-costs');
- },'category-costs.store');
+},'category-costs.store');
+
+$app->get('/category-costs/{id}/edit', function(ServerRequestInterface $request) use ($app) {
+    
+    $view = $app->service('view.render');
+
+    $id = $request->getAttribute('id');
+    $categoryCost =  \Src\Models\CategoryCost::find($id);
+
+    return $view->render('category-costs/edit.html.twig',[
+        'category' => $categoryCost
+    ]); 
+},'category-costs.edit');
+
+$app->post('/category-costs/{id}/update', function(ServerRequestInterface $request) use ($app) {
+
+    $id = $request->getAttribute('id');
+    $data = $request->getParsedBody(); //update category
+
+    $categoryCost =  \Src\Models\CategoryCost::findOrFail($id);
+    $categoryCost->update($data);
+
+    return $app->redirect('/category-costs');
+
+},'category-costs.update');
+
 
 $app->start();
