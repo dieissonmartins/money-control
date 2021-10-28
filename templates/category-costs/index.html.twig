@@ -12,8 +12,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
+                            <a href="{{ route('category-costs.create') }}" class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus"></span> Novo Item
                             </a>
                         </div>
                     </div>
@@ -34,12 +34,12 @@
                                         <td>{{ category.id }}</td>
                                         <td>{{ category.name }}</td>
                                         <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            <a href="{{ route('category-costs.edit',{'id': category.id}) }}">
+                                                <span class="glyphicon glyphicon-pencil"></span> Editar
                                             </a>
                                             |
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-remove"></span>
+                                            <a href="{{ route('category-costs.destroy',{'id': category.id}) }}">
+                                                <span class="glyphicon glyphicon-remove"></span> Apagar
                                             </a>
                                         </td>
                                     </tr>
