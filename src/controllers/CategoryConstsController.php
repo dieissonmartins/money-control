@@ -2,13 +2,15 @@
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Src\Models\CategoryCost;
 
 $app->get('/category-costs', function(RequestInterface $request) use ($app) {
     
     $view = $app->service('view.render');
 
-    $model = new \Src\Models\CategoryCost();
-    $categoryCosts = $model->all();
+    $repository = $app->service('repository.factory')->factory(CategoryCost::class);
+
+    $categoryCosts = $repository->all();
    
     return $view->render('category-costs/index.html.twig',[
         'categories' => $categoryCosts
