@@ -28,6 +28,7 @@ $app->get('/', function(RequestInterface $request) use ($app) {
 });
 
 require_once(__DIR__ . '/../src/controllers/CategoryConstsController.php');
+require_once(__DIR__ . '/../src/controllers/UserController.php');
 
 
 $app->start();
