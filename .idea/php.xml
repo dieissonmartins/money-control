@@ -40,6 +40,7 @@
       <path value="$PROJECT_DIR$/vendor/illuminate/support" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/jasny/auth" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
