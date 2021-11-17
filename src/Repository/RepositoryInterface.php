@@ -7,7 +7,7 @@ interface RepositoryInterface
 {
     public function all(): array;
 
-    public function find(int $id,bool $failIfNotExist = true);
+    public function find(int $id, bool $failIfNotExist = true);
 
     public function create(array $data);
 
@@ -15,7 +15,7 @@ interface RepositoryInterface
 
     public function delete($id);
 
-    public function findByField(string $field,$value);
+    public function findByField(string $field, $value);
 
     public function findOneBy(array $search);
 }
