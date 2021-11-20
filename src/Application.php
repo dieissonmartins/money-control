@@ -12,7 +12,7 @@ use Zend\Diactoros\Response\SapiEmitter;
 
 class Application
 {
-    private $serviceContainer;
+    private ServiceContainerInterface $serviceContainer;
 
     public function __construct(ServiceContainerInterface $serviceContainer)
     {
@@ -22,17 +22,6 @@ class Application
     public function service($name)
     {
         return $this->serviceContainer->get($name);
-    }
-
-    public function addService(string $name, $service): void
-    {
-        if (is_callable($service)) {
-
-            $this->serviceContainer->addLazy($name, $service);
-        } else {
-
-            $this->serviceContainer->add($name, $service);
-        }
     }
 
     public function plugin(PluginInterface $plugin): void
@@ -95,7 +84,7 @@ class Application
 
     protected function emitResponse(ResponseInterface $response) {
 
-        // Sapi - Server API - Server Applicartion Promma Interface
+        // Sapi - Server API - Server Application Prom Interface
         $emitter = new SapiEmitter();
         $emitter->emit($response);
     }

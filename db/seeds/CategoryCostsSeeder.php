@@ -13,16 +13,17 @@ final class CategoryCostsSeeder extends AbstractSeed
         foreach(range(1,1000) as $v) {
             
             $data[$v] = [
+                'id' => $v,
                 'name' => $faker->name,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
         }
 
-        $categoryCosts = $this->table('category_costs');
+        //$categoryCosts = $this->table('category_costs');
 
-        $categoryCosts->insert($data);
+        //$categoryCosts->insert($data);
 
-        $categoryCosts->save();
+        //$categoryCosts->save();
     }
 }

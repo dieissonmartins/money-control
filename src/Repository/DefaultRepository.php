@@ -69,7 +69,10 @@ class DefaultRepository implements RepositoryInterface
 
     public function findByField(string $field, $value)
     {
-        return $this->_model->where($field, '=', $value)->get();
+        return $this->_model
+            ->where($field, '=', $value)
+            ->get();
+
     }
 
     public function findOneBy(array $search)
