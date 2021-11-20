@@ -8,11 +8,18 @@ class Auth implements AuthInterface
 {
     private JasnyAuth $jasnyAuth;
 
+    /**
+     * @param JasnyAuth $jasnyAuth
+     */
     public function __construct(JasnyAuth $jasnyAuth)
     {
         $this->jasnyAuth = $jasnyAuth;
     }
 
+    /**
+     * @param array $credentials
+     * @return bool
+     */
     public function login(array $credentials): bool
     {
         [
@@ -20,11 +27,14 @@ class Auth implements AuthInterface
             'password' => $password
         ] = $credentials;
 
-        $ret = $this->jasnyAuth->login($email,$password) !== null;
+        $ret = $this->jasnyAuth->login($email, $password) !== null;
 
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function check(): bool
     {
         return false;
@@ -35,6 +45,10 @@ class Auth implements AuthInterface
 
     }
 
+    /**
+     * @param string $password
+     * @return string
+     */
     public function hashPassword(string $password): string
     {
         $ret = $this->jasnyAuth->hashPassword($password);
