@@ -5,7 +5,14 @@ namespace Src\Models;
 use Illuminate\Database\Eloquent\Model;
 use Jasny\Auth\User as JasnyUser;
 
-class User extends Model implements JasnyUser
+/**
+ * @property mixed $first_name
+ * @property mixed $last_name
+ * @property mixed $email
+ * @property mixed $password
+ * @property mixed $id
+ */
+class User extends Model implements JasnyUser, UserInterface
 {
     protected $table = "users";
 
@@ -45,5 +52,20 @@ class User extends Model implements JasnyUser
     public function onLogout()
     {
         // TODO: Implement onLogout() method.
+    }
+
+    public function getFullName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
     }
 }
