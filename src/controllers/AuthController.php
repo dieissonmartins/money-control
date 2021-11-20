@@ -23,10 +23,8 @@ $app->post('/login', function (ServerRequestInterface $request) use ($app) {
 
 }, 'auth.login');
 
-/*
-$app->get(
-    '/logout', function () use ($app) {
-        $app->service('auth')->logout();
-        return $app->route('auth.show_login_form');
-    }, 'auth.logout'
-);*/
+
+$app->get('/logout', function () use ($app) {
+    $app->service('auth')->logout();
+    return $app->route('auth.show_login_form');
+}, 'auth.logout');
