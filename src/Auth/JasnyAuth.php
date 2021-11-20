@@ -3,6 +3,7 @@
 namespace Src\Auth;
 
 use Jasny\Auth\Sessions;
+use Jasny\Auth\User;
 use Src\Repository\RepositoryInterface;
 
 class JasnyAuth extends \Jasny\Auth
