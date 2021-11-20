@@ -30,7 +30,13 @@ $app->post('/users/store', function(ServerRequestInterface $request) use ($app) 
     
     //create user
     $data = $request->getParsedBody();
-    \Src\Models\User::create($data);
+
+    $repository = $app->service('user.repository');
+    $auth = $app->service('auth');
+    $data['password'] = $auth->hashPassword($data['password']);
+    $repository->create($data);
+    
+    // \Src\Models\User::create($data);
  
     return $app->redirect('/users');
 },'users.store');
