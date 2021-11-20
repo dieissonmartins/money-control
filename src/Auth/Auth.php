@@ -25,12 +25,12 @@ class Auth implements AuthInterface
         return $ret;
     }
 
-    public function check(array $credentials): bool
+    public function check(): bool
     {
         return false;
     }
 
-    public function logout(array $credentials): void
+    public function logout(): void
     {
 
     }

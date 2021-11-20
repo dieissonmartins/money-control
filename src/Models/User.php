@@ -10,10 +10,13 @@ class User extends Model implements JasnyUser
     protected $table = "users";
 
     protected $fillable = [
+        'id',
         'first_name',
         'last_name',
         'email',
-        'password'
+        'password',
+        'created_at',
+        'updated_at',
     ];
 
     public function getId(): int
