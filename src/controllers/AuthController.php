@@ -2,23 +2,25 @@
 
 use Psr\Http\Message\ServerRequestInterface;
 
-$app->get(
-    '/login', function () use ($app) {
-        $view = $app->service('view.render');
-        return $view->render('auth/login.html.twig');
+$app->get('/login', function () use ($app) {
+    $view = $app->service('view.render');
+    return $view->render('auth/login.html.twig');
 }, 'auth.show_login_form');
 
 
-$app->post( 
-    '/login', function (ServerRequestInterface $request) use ($app) {
-       /* $view = $app->service('view.render');
-        $auth = $app->service('auth');
-        $data = $request->getParsedBody();
-        $result = $auth->login($data);
-        if(!$result) {
-            return $view->render('auth/login.html.twig');
-        }
-        return $app->route('category-costs.list'); */
+$app->post('/login', function (ServerRequestInterface $request) use ($app) {
+
+    $view = $app->service('view.render');
+    $auth = $app->service('auth');
+    $data = $request->getParsedBody();
+    $result = $auth->login($data);
+
+    if (!$result) {
+        return $view->render('auth/login.html.twig');
+    }
+
+    return $app->redirect('/category-costs');
+
 }, 'auth.login');
 
 /*

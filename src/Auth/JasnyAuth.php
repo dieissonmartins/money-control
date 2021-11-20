@@ -32,9 +32,9 @@ class JasnyAuth extends \Jasny\Auth
 
     /**
      * @param string $username
-     * @return array
+     *
      */
-    public function fetchUserByUsername($username): array
+    public function fetchUserByUsername($username)
     {
         return $this->repository->findByField('email',$username)[0];
     }
