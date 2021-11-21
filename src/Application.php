@@ -13,7 +13,7 @@ use Zend\Diactoros\Response\SapiEmitter;
 class Application
 {
     private ServiceContainerInterface $serviceContainer;
-    private $befores;
+    private $befores = [];
 
     public function __construct(ServiceContainerInterface $serviceContainer)
     {
