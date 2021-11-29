@@ -10,7 +10,8 @@ $app->get('/category-costs', function(RequestInterface $request) use ($app) {
 
     $repository = $app->service('repository.factory')->factory(CategoryCost::class);
 
-    $categoryCosts = $repository->all();
+    $auth = $app->service('auth');
+    $categoryCosts = $repository->findByField('user_id',$auth->user()->getId());
    
     return $view->render('category-costs/index.html.twig',[
         'categories' => $categoryCosts
@@ -27,9 +28,13 @@ $app->get('/category-costs/create', function(RequestInterface $request) use ($ap
 },'category-costs.create');
 
 $app->post('/category-costs/store', function(ServerRequestInterface $request) use ($app) {
-    
+
+    $auth = $app->service('auth');
+
     //create category
     $data = $request->getParsedBody();
+    $data['user_id'] = $auth->user()->getId();
+
     \Src\Models\CategoryCost::create($data);
  
     return $app->redirect('/category-costs');
@@ -49,8 +54,11 @@ $app->get('/category-costs/{id}/edit', function(ServerRequestInterface $request)
 
 $app->post('/category-costs/{id}/update', function(ServerRequestInterface $request) use ($app) {
 
+    $auth = $app->service('auth');
+
     $id = $request->getAttribute('id');
     $data = $request->getParsedBody(); //update category
+    $data['user_id'] = $auth->user()->getId();
 
     $categoryCost =  \Src\Models\CategoryCost::findOrFail($id);
     $categoryCost->update($data);
