@@ -54,8 +54,13 @@ $app->get('/bill-pays/{id}/edit', function(ServerRequestInterface $request) use 
     $id = $request->getAttribute('id');
     $billReceive =  \Src\Models\BillPay::find($id);
 
+    $repository = $app->service('repository.factory')->factory(CategoryCost::class);
+    $auth = $app->service('auth');
+    $categories = $repository->findByField('user_id',$auth->user()->getId());
+
     return $view->render('bill-pays/edit.html.twig',[
-        'bill' => $billReceive
+        'bill' => $billReceive,
+        'categories' => $categories
     ]); 
 },'bill-pays.edit');
 
