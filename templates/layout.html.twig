@@ -33,11 +33,11 @@
                             Contas <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Contas a pagar</a></li>
+                            <li><a href="{{ route('bill-pays.index') }}">Contas a pagar</a></li>
                             <li><a href="{{ route('bill-receives.index') }}">Contas a receber</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Extrato</a></li>
+                    <li><a href="{{ route('statements.index') }}">Extrato</a></li>
                     <li><a href="#">Gráfico de Gastos</a></li>
                     <li><a href="{{ route('users.index') }}">Usuário</a></li>
                 </ul>
