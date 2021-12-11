@@ -2,32 +2,39 @@
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Src\Models\BillReceive;
+use Src\Models\BillPay;
+use Src\Models\CategoryCost;
 
-$app->get('/bill-receives', function(RequestInterface $request) use ($app) {
+$app->get('/bill-pays', function(RequestInterface $request) use ($app) {
     
     $view = $app->service('view.render');
 
-    $repository = $app->service('repository.factory')->factory(BillReceive::class);
+    $repository = $app->service('repository.factory')->factory(BillPay::class);
 
     $auth = $app->service('auth');
-    $billReceives = $repository->findByField('user_id',$auth->user()->getId());
+    $billPays = $repository->findByField('user_id',$auth->user()->getId());
    
-    return $view->render('bill-receives/index.html.twig',[
-        'bills' => $billReceives
+    return $view->render('bill-pays/index.html.twig',[
+        'bills' => $billPays
     ]); 
     
-},'bill-receives.index');
+},'bill-pays.index');
 
-$app->get('/bill-receives/create', function(RequestInterface $request) use ($app) {
+$app->get('/bill-pays/create', function(RequestInterface $request) use ($app) {
     
     $view = $app->service('view.render');
 
-    return $view->render('bill-receives/create.html.twig');
-    
-},'bill-receives.create');
+    $repository = $app->service('repository.factory')->factory(CategoryCost::class);
+    $auth = $app->service('auth');
+    $categories = $repository->findByField('user_id',$auth->user()->getId());
 
-$app->post('/bill-receives/store', function(ServerRequestInterface $request) use ($app) {
+    return $view->render('bill-pays/create.html.twig',[
+        'categories' => $categories
+    ]);
+    
+},'bill-pays.create');
+
+$app->post('/bill-pays/store', function(ServerRequestInterface $request) use ($app) {
 
     $auth = $app->service('auth');
 
@@ -35,24 +42,24 @@ $app->post('/bill-receives/store', function(ServerRequestInterface $request) use
     $data = $request->getParsedBody();
     $data['user_id'] = $auth->user()->getId();
 
-    \Src\Models\BillReceive::create($data);
+    \Src\Models\BillPay::create($data);
  
-    return $app->redirect('/bill-receives');
-},'bill-receives.store');
+    return $app->redirect('/bill-pays');
+},'bill-pays.store');
 
-$app->get('/bill-receives/{id}/edit', function(ServerRequestInterface $request) use ($app) {
+$app->get('/bill-pays/{id}/edit', function(ServerRequestInterface $request) use ($app) {
     
     $view = $app->service('view.render');
 
     $id = $request->getAttribute('id');
-    $billReceive =  \Src\Models\BillReceive::find($id);
+    $billReceive =  \Src\Models\BillPay::find($id);
 
-    return $view->render('bill-receives/edit.html.twig',[
+    return $view->render('bill-pays/edit.html.twig',[
         'bill' => $billReceive
     ]); 
-},'bill-receives.edit');
+},'bill-pays.edit');
 
-$app->post('/bill-receives/{id}/update', function(ServerRequestInterface $request) use ($app) {
+$app->post('/bill-pays/{id}/update', function(ServerRequestInterface $request) use ($app) {
 
     $auth = $app->service('auth');
 
@@ -60,20 +67,20 @@ $app->post('/bill-receives/{id}/update', function(ServerRequestInterface $reques
     $data = $request->getParsedBody(); //update category
     $data['user_id'] = $auth->user()->getId();
 
-    $billReceive =  \Src\Models\BillReceive::findOrFail($id);
+    $billReceive =  \Src\Models\BillPay::findOrFail($id);
     $billReceive->update($data);
 
-    return $app->redirect('/bill-receives');
+    return $app->redirect('/bill-pays');
 
-},'bill-receives.update');
+},'bill-pays.update');
 
-$app->get('/bill-receives/{id}/destroy', function(ServerRequestInterface $request) use ($app) {
+$app->get('/bill-pays/{id}/destroy', function(ServerRequestInterface $request) use ($app) {
 
     $id = $request->getAttribute('id');
 
-    $billReceive =  \Src\Models\BillReceive::findOrFail($id);
+    $billReceive =  \Src\Models\BillPay::findOrFail($id);
     $billReceive->delete();
 
-    return $app->redirect('/bill-receives');
+    return $app->redirect('/bill-pays');
 
-},'bill-receives.destroy');
+},'bill-pays.destroy');
