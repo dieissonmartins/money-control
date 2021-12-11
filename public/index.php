@@ -30,6 +30,7 @@ $app->get('/', function(RequestInterface $request) use ($app) {
 });
 
 require_once(__DIR__ . '/../src/controllers/BillReceivesController.php');
+require_once(__DIR__ . '/../src/controllers/BillPaysController.php');
 require_once(__DIR__ . '/../src/controllers/CategoryConstsController.php');
 require_once(__DIR__ . '/../src/controllers/UserController.php');
 require_once(__DIR__ . '/../src/controllers/AuthController.php');
