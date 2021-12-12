@@ -29,6 +29,7 @@ $app->get('/', function(RequestInterface $request) use ($app) {
     
 });
 
+require_once(__DIR__ . '/../src/controllers/ChartsController.php');
 require_once(__DIR__ . '/../src/controllers/StatementsController.php');
 require_once(__DIR__ . '/../src/controllers/BillReceivesController.php');
 require_once(__DIR__ . '/../src/controllers/BillPaysController.php');
