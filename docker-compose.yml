@@ -28,6 +28,28 @@ services:
     networks:
       - money-control
 
+  db:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: mcdb
+      MYSQL_USER: mcuser
+      MYSQL_PASSWORD: mcpass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+  adminer:
+      depends_on:
+        - db
+      image: adminer
+      restart: always
+      ports:
+        - 8888:8080
+
 networks:
   money-control:
     driver: bridge
+
+volumes:
+  db:
